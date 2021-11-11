@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, Fragment } from "react";
+import Home from "./component/Home";
+import "./App.css";
 
-function App() {
+import UserState from "./context/userState";
+const App = () => {
+  const [users, setUsers] = useState([]);
+
+  //Delete a user
+  const DeleteUser = (id) => {
+    setUsers(users.filter((user) => user.id !== id));
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <UserState>
+        <Home DeleteUser={DeleteUser} />
+      </UserState>
+    </Fragment>
   );
-}
+};
 
 export default App;
